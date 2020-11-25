@@ -85,7 +85,7 @@ couponsObj = {
                         }
                     }//end for
                 }//end if length
-                console.log('no coupon found');
+                console.log('no coupon found or no avail amount');
                 
                 //NO NEED TO RETURN, the flow will just stop
             }//end reqListener
@@ -201,8 +201,8 @@ couponsObj = {
 
             let data = {
                 __metadata: { 'type': 'SP.Data.CouponsClickedListListItem' },
-                Title: couponsObj.item.Title,
-                DisplayText: couponsObj.item.DisplayText,
+                //Title: couponsObj.item.Title,
+                //DisplayText: couponsObj.item.DisplayText,
                 UserId: couponsObj.currentUserId,
                 CouponID: couponsObj.item.ID,
             }
@@ -257,6 +257,8 @@ couponsObj = {
 
     showDialog_congratz : function showDialog_congratz(){
         console.log('showDialog_congratz');
+
+        document.querySelector('.coupon-div').remove();
 
         let dialog = document.createElement("DIALOG");
         dialog.className="coupon-dialog"

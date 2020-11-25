@@ -14,7 +14,6 @@
 
 ## create CouponsClickedList
 * add following fields
-    * DisplayText     - rich html text
     * User            - user
     * CouponID        - number
 
