@@ -5,7 +5,7 @@ setTimeout(() => {
 //}, 10*1000);
 }, 100);
 
-
+//get user ID in the end 
 couponsObj = {
     /* STEPS    
         1. ask list if there is a page with our page name
@@ -118,18 +118,49 @@ couponsObj = {
     hasUserClickCoupon : function hasUserClickCoupon(callback){
         console.log('hasUserClickCoupon ');
         //if user clicked then stop
+        try {
+            //querystring is "$select=...", can be null
+            function reqListener() {
+                //arr returns filtered by active and dates
+                //need to filter coupons and page
+                let arr = JSON.parse(this.responseText)//.d.results
+                console.log('hasUserClickCoupon ajax results', arr);
 
-        //else goto showCoupon
-        if (callback) {
-            callback();
-        } else {
-            showCoupon();
+                if (arr && arr.d && arr.d.results && arr.d.results.length > 0) {
+                    console.log('user clicked this coupon b4, so not showing him it again');
+                } else {
+                    //else goto showCoupon
+                    if (callback) {
+                        callback();
+                    } else {
+                        couponsObj.showCoupon();
+                    }
+                }//end if length
+                //NO NEED TO RETURN, the flow will just stop
+            }//end reqListener
+
+
+            //let querystring = `$filter=(Active eq 1) and (StartDate le datetime'${todayZero}') and 
+            //(EndDate ge datetime'${tomorowZero}')`
+            let querystring = `$filter=(CouponID eq ${couponsObj.item.ID}) and (UserId eq ${couponsObj.currentUserId})`;
+
+            var oReq = new XMLHttpRequest();
+            oReq.addEventListener("load", reqListener);
+            oReq.open("GET", couponsObj.ctx.web.absoluteUrl +
+                "/_api/lists/GetByTitle('CouponsClickedList')/items?" + querystring);
+            oReq.setRequestHeader("Accept", "application/json;odata=verbose");
+            oReq.send();
+        } catch (e) {
+            console.error('getCoupon error')
+            console.error(e)
+            callback(null)
         }
-    },
+    },//end hasUserClickCoupon
 
     couponClick : function couponClick(){
         console.log('couponClick start');
         if (couponsObj.clicked && couponsObj.clicked == true) {
+            console.log('couponClick - already clicked');
             return; //dont allow to many clikcs
         }
     /* 7. onclick:
@@ -144,20 +175,51 @@ couponsObj = {
                 //if it got here then user did not click
                 couponsObj.clicked = true
 
-                //7.2 create row in CouponClickedList 
-                couponsObj.createItem_CouponClickedList();
-                //7.3 Increment CouponsList used field
-                couponsObj.updateItem_CouponUsedAmount();
-                //7.4 show dialog
-                couponsObj.showDialog_congratz();
-
-                console.log('couponClick end');
+                couponsObj.getRequestDigest(function afterRequestDigest(){
+                    //7.2 create row in CouponClickedList 
+                    couponsObj.createItem_CouponClickedList();
+                    //7.3 Increment CouponsList used field
+                    couponsObj.updateItem_CouponUsedAmount();
+                    //7.4 show dialog
+                    couponsObj.showDialog_congratz();
+                    console.log('couponClick end');
+                })
             })
         })
-    },
+    },//end couponClick
 
     createItem_CouponClickedList : function createItem_CouponClickedList(){
         console.log('createItem_CouponClickedList');
+        try {
+            //querystring is "$select=...", can be null
+            function reqListener() {
+                //arr returns filtered by active and dates
+                //need to filter coupons and page
+                let res = JSON.parse(this.responseText)//.d.results
+                console.log('createItem_CouponClickedList ajax results', res);
+            }//end reqListener
+
+            let data = {
+                __metadata: { 'type': 'SP.Data.CouponsClickedListListItem' },
+                Title: couponsObj.item.Title,
+                DisplayText: couponsObj.item.DisplayText,
+                UserId: couponsObj.currentUserId,
+                CouponID: couponsObj.item.ID,
+            }
+
+            var oReq = new XMLHttpRequest();
+            oReq.addEventListener("load", reqListener);
+            oReq.open("POST", couponsObj.ctx.web.absoluteUrl +
+                "/_api/lists/GetByTitle('CouponsClickedList')/items");
+            oReq.setRequestHeader("Accept", "application/json;odata=verbose");
+            oReq.setRequestHeader("Content-Type", "application/json;odata=verbose");
+            oReq.setRequestHeader("X-RequestDigest", couponsObj.RequestDigest);
+            oReq.send(JSON.stringify(data));
+        } catch (e) {
+            console.error('getCoupon error')
+            console.error(e)
+            callback(null)
+        }
 
     },
 
@@ -173,4 +235,51 @@ couponsObj = {
 
     },
 
+    getUserId : function getUserId(){
+        console.log('getUserId');
+        try {
+            function reqListener() {
+                let results = JSON.parse(this.responseText)
+                console.log('getUserId ajax results', results);
+                couponsObj.currentUserId = results.d.Id
+            }//end reqListener
+
+            var oReq = new XMLHttpRequest();
+            oReq.addEventListener("load", reqListener);
+            oReq.open("GET", window['injected_pageContext'].web.absoluteUrl +
+                "/_api/Web/CurrentUser?$select=id");
+            oReq.setRequestHeader("Accept", "application/json;odata=verbose");
+            oReq.send();
+        } catch (e) {
+            console.error('getUserId error')
+            console.error(e)
+        }
+    },
+
+    getRequestDigest : function getRequestDigest(callback){
+        console.log('getRequestDigest');
+        try {
+            function reqListener2() {
+                let results = JSON.parse(this.responseText)
+                console.log('digest ajax results', results);
+                couponsObj.RequestDigest = results.d.GetContextWebInformation.FormDigestValue
+                callback()
+            }//end reqListener
+
+            var oReq = new XMLHttpRequest();
+            oReq.addEventListener("load", reqListener2);
+            oReq.open("POST", window['injected_pageContext'].web.absoluteUrl + "/_api/contextinfo");
+            oReq.setRequestHeader("Accept", "application/json;odata=verbose");
+            oReq.send();
+
+        } catch (e) {
+            console.error('getRequestDigest error')
+            console.error(e)
+        }
+    },
+
 }//end couponsObj
+couponsObj.getUserId();
+
+
+
