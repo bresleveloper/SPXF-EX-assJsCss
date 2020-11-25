@@ -3,7 +3,7 @@
 ## create CouponsList
 * add following fields - ALL REQUIRED
     * PageAddress (כתובת דף)  - text
-    * CouponBackGround         - text
+    * CouponBackGround         - Picture
     * StartDate                - date
     * EndDate                  - date
     * TotalAmount              - number
