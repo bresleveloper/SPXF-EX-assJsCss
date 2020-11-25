@@ -25,8 +25,8 @@ export default class AddCssJsToSiteApplicationCustomizer
 
     
   //private _JS: string = "https://*******.sharepoint.com/sites/CommunicationSiteTopic/Shared%20Documents/MyScript.js";
-  private _JS: string = "/sites/CommArielRonit/CustomFiles/CustomSiteScript.js";
-  private _CSS: string = "/sites/CommArielRonit/CustomFiles/CustomSiteScript.css";
+  private _JS: string = "/CustomFiles/CustomSiteScript.js";
+  private _CSS: string = "/CustomFiles/CustomSiteScript.css";
 
   @override
   public onInit(): Promise<void> {
@@ -46,9 +46,11 @@ export default class AddCssJsToSiteApplicationCustomizer
       console.log('system page, moving on');
     } else {
       console.log('add csss to end of head');
+      let filesPrefix = this.context.pageContext.web.absoluteUrl
+
       const head: any = document.getElementsByTagName("head")[0] || document.documentElement;
       let customStyle: HTMLLinkElement = document.createElement("link");
-      customStyle.href = this._CSS;
+      customStyle.href = filesPrefix + this._CSS;
       customStyle.rel = "stylesheet";
       customStyle.type = "text/css";
       head.insertAdjacentElement("beforeEnd", customStyle);
@@ -56,7 +58,7 @@ export default class AddCssJsToSiteApplicationCustomizer
 
       console.log('add js to end of body');
       let myScriptTag: HTMLScriptElement = document.createElement("script");
-      myScriptTag.src = this._JS;
+      myScriptTag.src = filesPrefix + this._JS;
       myScriptTag.type = "text/javascript";
       document.body.appendChild(myScriptTag);
 

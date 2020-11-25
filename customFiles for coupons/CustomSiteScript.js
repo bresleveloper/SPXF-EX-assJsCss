@@ -225,7 +225,38 @@ couponsObj = {
 
     updateItem_CouponUsedAmount : function updateItem_CouponUsedAmount(){
         console.log('updateItem_CouponUsedAmount');
+        try {
+            function reqListener() {
+                if (this.readyState == 4 && this.status == 204) {
+                    console.log('updateItem_CouponUsedAmount ajas ready status', this.readyState, this.status);
+                    let res = JSON.parse(this.responseText)//.d.results
+                    console.log('updateItem_CouponUsedAmount ajax results', res);
+                    console.log('updateItem_CouponUsedAmount amount b4', couponsObj.item.UsedAmount);
+                }
+            }//end reqListener
 
+            let data = {
+                __metadata: { 'type': "SP.Data.CouponsListListItem" },
+                UsedAmount: couponsObj.item.UsedAmount + 1,
+            }
+
+            var oReq = new XMLHttpRequest();
+            oReq.addEventListener("readystatechange", reqListener);
+            oReq.open("POST", couponsObj.ctx.web.absoluteUrl +
+                `/_api/lists/GetByTitle('CouponsList')/items(${couponsObj.item.ID})`);
+            oReq.setRequestHeader("Accept", "application/json;odata=verbose");
+            oReq.setRequestHeader("Content-Type", "application/json;odata=verbose");
+            oReq.setRequestHeader("X-RequestDigest", couponsObj.RequestDigest);
+
+            oReq.setRequestHeader("X-HTTP-Method", "MERGE");
+            oReq.setRequestHeader("IF-MATCH", "*");
+
+            oReq.send(JSON.stringify(data));
+        } catch (e) {
+            console.error('getCoupon error')
+            console.error(e)
+            callback(null)
+        }
     },
 
     showDialog_congratz : function showDialog_congratz(){
