@@ -11,3 +11,13 @@
 .coupon-div.c-top{ top: 230px;}
 .coupon-div.c-right{ right: 50px;}
 .coupon-div.c-left{ left: 50px;}
+
+.coupon-dialog{    max-width: 60%;
+    max-height: 70%;
+    overflow-x: hidden;
+    overflow-y: scroll;
+}
+.d-img {max-width: 80%;}
+.d-span{position: absolute;top: 60px;}
+.d-close{position: absolute;top: 21px; right:30px; font-weight: bold; 
+    font-size: 30px; cursor: pointer;}

@@ -258,8 +258,26 @@ couponsObj = {
     showDialog_congratz : function showDialog_congratz(){
         console.log('showDialog_congratz');
 
+        let dialog = document.createElement("DIALOG");
+        dialog.className="coupon-dialog"
+        let bgOjb = JSON.parse(couponsObj.item['CouponBackGround'])
 
+        dialog.innerHTML = `
+            <h1>YOUR COUPON IS IN YOUR MAILBOX</h1>
+            <span class="d-span">Enjoy your</span>
+            <span class="d-close" onclick="couponsObj.closeDlg()">X</span>
+            <h2>${couponsObj.item.Title}</h2>
+            <div>${couponsObj.item.DisplayText}</div>
+            <img class="d-img" src="${bgOjb.serverRelativeUrl}"/>
+        `
+        let section = document.querySelector('section.mainContent')
+        section.appendChild(dialog);
 
+        dialog.showModal();
+    },
+
+    closeDlg:function closeDlg(){
+        document.querySelector('.coupon-dialog').close()
     },
 
     getUserId : function getUserId(){

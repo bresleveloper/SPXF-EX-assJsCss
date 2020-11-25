@@ -1,15 +1,18 @@
 # add-css-js-ti-site
 
+## Great Example for item create/add/update 
+in `customFiles for coupons/CustomSiteScript.js`
+
+
 ## Set your site
 Change paths in:
-* NOT NEEDED - `config/write-manifests.json` cdn path to your site and build 
-* `src/extensions/AddCssJsToSiteApplicationCustomizer.ts` files paths
 
 steps:
 * after build copy `temp\deploy` folder content to CDN path
-* add to app catalog, dont click the checkbox
-* add the app
-* add jss/css files to path in .ts file
+* add to app catalog (create if needed, add to the "distribute to SharePoint"), dont click the checkbox
+* add the app (site content -> new -> app)
+* create DocumentLibrary named `CustomFiles` (can be changed in the .ts file)
+* add jss/css files there
 
 
 
