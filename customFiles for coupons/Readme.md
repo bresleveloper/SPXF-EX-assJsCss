@@ -18,5 +18,5 @@
     * CouponID        - number
 
 ## flow - > uses title from CouponsList, send email 
-* (instructions)[https://bresleveloper.blogspot.com/2020/11/power-automation-flow-send-email-with.html]
+* [instructions](https://bresleveloper.blogspot.com/2020/11/power-automation-flow-send-email-with.html)
 * added zip, import and set to the right site
