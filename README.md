@@ -1,7 +1,17 @@
 # add-css-js-ti-site
 
 ## Set your site
-change `config/write-manifests.json` cdn path to your site and build
+Change paths in:
+* NOT NEEDED - `config/write-manifests.json` cdn path to your site and build 
+* `src/extensions/addCssJsToSite` files paths
+
+steps:
+* after build copy `temp\deploy` folder content to CDN path
+* add to app catalog, dont click the checkbox
+* add the app
+* add jss/css files to path in .ts file
+
+
 
 ### commands
 once - `gulp trust-dev-cert`
@@ -23,3 +33,9 @@ once - `gulp trust-dev-cert`
 `git commit -m "comment"`
 `git push -u origin master`
 
+
+
+
+
+  "cdnBasePath": "/sites/CommArielRonit/CustomFiles/ExtensionFiles"
+  "cdnBasePath": "<!-- PATH TO CDN -->"

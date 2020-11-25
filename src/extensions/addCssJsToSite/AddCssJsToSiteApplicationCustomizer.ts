@@ -25,8 +25,8 @@ export default class AddCssJsToSiteApplicationCustomizer
 
     
   //private _JS: string = "https://*******.sharepoint.com/sites/CommunicationSiteTopic/Shared%20Documents/MyScript.js";
-  private _JS: string = "/sites/CommArielRonit/Style%20Library/CustomSiteScript.js";
-  private _CSS: string = "/sites/CommArielRonit/Style%20Library/CustomSiteScript.css";
+  private _JS: string = "/sites/CommArielRonit/CustomFiles/CustomSiteScript.js";
+  private _CSS: string = "/sites/CommArielRonit/CustomFiles/CustomSiteScript.css";
 
   @override
   public onInit(): Promise<void> {
@@ -39,22 +39,27 @@ export default class AddCssJsToSiteApplicationCustomizer
 
     //Dialog.alert(`Hello from ${strings.Title}:\n\n${message}`);
     console.log(`Hello from ${strings.Title}:\n\n${message}`);
-    
+    console.log('window._spPageContextInfo', window['_spPageContextInfo']);
+    console.log('this.context.pageContext', this.context.pageContext);
 
-    console.log('add csss to end of head');
-    const head: any = document.getElementsByTagName("head")[0] || document.documentElement;
-    let customStyle: HTMLLinkElement = document.createElement("link");
-    customStyle.href = this._CSS;
-    customStyle.rel = "stylesheet";
-    customStyle.type = "text/css";
-    head.insertAdjacentElement("beforeEnd", customStyle);
+    if (window['_spPageContextInfo']) {
+      console.log('system page, moving on');
+    } else {
+      console.log('add csss to end of head');
+      const head: any = document.getElementsByTagName("head")[0] || document.documentElement;
+      let customStyle: HTMLLinkElement = document.createElement("link");
+      customStyle.href = this._CSS;
+      customStyle.rel = "stylesheet";
+      customStyle.type = "text/css";
+      head.insertAdjacentElement("beforeEnd", customStyle);
 
 
-    console.log('add js to end of body');
-    let myScriptTag: HTMLScriptElement = document.createElement("script");
-    myScriptTag.src = this._JS;
-    myScriptTag.type = "text/javascript";
-    document.body.appendChild(myScriptTag);
+      console.log('add js to end of body');
+      let myScriptTag: HTMLScriptElement = document.createElement("script");
+      myScriptTag.src = this._JS;
+      myScriptTag.type = "text/javascript";
+      document.body.appendChild(myScriptTag);
+    }
 
     console.log('done');
     return Promise.resolve();
