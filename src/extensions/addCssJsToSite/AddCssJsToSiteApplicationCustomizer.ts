@@ -59,6 +59,12 @@ export default class AddCssJsToSiteApplicationCustomizer
       myScriptTag.src = this._JS;
       myScriptTag.type = "text/javascript";
       document.body.appendChild(myScriptTag);
+
+      //add some data to page
+      window['injected_pageContext'] = this.context.pageContext;
+      //window['customData'].webAbsoluteUrl =  this.context.pageContext.web.absoluteUrl;
+      //window['customData'].user =  this.context.pageContext.user;
+      console.log("window['injected_pageContext']", window['injected_pageContext']);
     }
 
     console.log('done');

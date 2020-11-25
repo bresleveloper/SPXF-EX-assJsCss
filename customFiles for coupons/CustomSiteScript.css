@@ -1,0 +1,13 @@
+/*hello*/
+
+.coupon-div{
+    position: fixed;
+    /*background: cyan;*/
+    padding: 15px 25px 5px;
+    cursor: pointer;
+}
+
+.coupon-div.c-bottom{ bottom: 30px;}
+.coupon-div.c-top{ top: 230px;}
+.coupon-div.c-right{ right: 50px;}
+.coupon-div.c-left{ left: 50px;}

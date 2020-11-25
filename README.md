@@ -3,7 +3,7 @@
 ## Set your site
 Change paths in:
 * NOT NEEDED - `config/write-manifests.json` cdn path to your site and build 
-* `src/extensions/addCssJsToSite` files paths
+* `src/extensions/AddCssJsToSiteApplicationCustomizer.ts` files paths
 
 steps:
 * after build copy `temp\deploy` folder content to CDN path
@@ -37,5 +37,3 @@ once - `gulp trust-dev-cert`
 
 
 
-  "cdnBasePath": "/sites/CommArielRonit/CustomFiles/ExtensionFiles"
-  "cdnBasePath": "<!-- PATH TO CDN -->"
