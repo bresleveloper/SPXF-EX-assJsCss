@@ -226,22 +226,18 @@ couponsObj = {
     updateItem_CouponUsedAmount : function updateItem_CouponUsedAmount(){
         console.log('updateItem_CouponUsedAmount');
         try {
-            function reqListener() {
-                if (this.readyState == 4 && this.status == 204) {
-                    console.log('updateItem_CouponUsedAmount ajas ready status', this.readyState, this.status);
-                    let res = JSON.parse(this.responseText)//.d.results
-                    console.log('updateItem_CouponUsedAmount ajax results', res);
-                    console.log('updateItem_CouponUsedAmount amount b4', couponsObj.item.UsedAmount);
-                }
-            }//end reqListener
-
             let data = {
                 __metadata: { 'type': "SP.Data.CouponsListListItem" },
                 UsedAmount: couponsObj.item.UsedAmount + 1,
             }
 
             var oReq = new XMLHttpRequest();
-            oReq.addEventListener("readystatechange", reqListener);
+            oReq.onreadystatechange = function(){
+                if (this.readyState == 4 && this.status == 204) {
+                    console.log('updateItem_CouponUsedAmount ajax success, b4 amount', couponsObj.item.UsedAmount);
+                }
+            }
+
             oReq.open("POST", couponsObj.ctx.web.absoluteUrl +
                 `/_api/lists/GetByTitle('CouponsList')/items(${couponsObj.item.ID})`);
             oReq.setRequestHeader("Accept", "application/json;odata=verbose");
