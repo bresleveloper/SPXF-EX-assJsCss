@@ -8,11 +8,12 @@ in `customFiles for coupons/CustomSiteScript.js`
 Change paths in:
 
 steps:
-* after build copy `temp\deploy` folder content to CDN path
 * add to app catalog (create if needed, add to the "distribute to SharePoint"), dont click the checkbox
 * add the app (site content -> new -> app)
 * create DocumentLibrary named `CustomFiles` (can be changed in the .ts file)
-* add jss/css files there
+* add jss/css files there, names must be `CustomSiteScript.js`, `CustomSiteScript.css`
+
+one costum solution is added under `customFiles for coupons`
 
 
 
