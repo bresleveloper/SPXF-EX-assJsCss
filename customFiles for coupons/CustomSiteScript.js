@@ -2,8 +2,8 @@
 setTimeout(() => {
     couponsObj.ctx = window['injected_pageContext'];
     couponsObj.startCouponScript(); 
-//}, 10*1000);
-}, 100);
+}, 10*1000);
+//}, 100);
 
 //get user ID in the end 
 couponsObj = {
@@ -50,7 +50,7 @@ couponsObj = {
         coupon.style.backgroundImage = `url('${bgOjb.serverRelativeUrl}')`
         coupon.onclick = couponsObj.couponClick;
         //coupon.innerHTML = `<div class="c-text" style="background-image:url('${bgOjb.serverRelativeUrl}'">${item['DisplayText']}</div>`
-        coupon.innerHTML = `<div class="c-text">${couponsObj.item['DisplayText']}</div>`
+        //coupon.innerHTML = `<div class="c-text">${couponsObj.item['DisplayText']}</div>`
 
         //document.body.appendChild(coupon);
         let section = document.querySelector('section.mainContent')
@@ -265,13 +265,16 @@ couponsObj = {
         let bgOjb = JSON.parse(couponsObj.item['CouponBackGround'])
 
         dialog.innerHTML = `
-            <h1>YOUR COUPON IS IN YOUR MAILBOX</h1>
-            <span class="d-span">Enjoy your</span>
+            <h1><i>Congratulations! You Found One!</i></h1>
+            <span class="d-span"><i>Go check your inbox for more details.</i></span>
             <span class="d-close" onclick="couponsObj.closeDlg()">X</span>
-            <h2>${couponsObj.item.Title}</h2>
-            <div>${couponsObj.item.DisplayText}</div>
+
             <img class="d-img" src="${bgOjb.serverRelativeUrl}"/>
-        `
+			<br><br>
+			<span><i>Thanks for participation.</i></span>
+		`
+		/*            <h2>${couponsObj.item.Title}</h2>
+            <div>${couponsObj.item.DisplayText}</div>*/
         let section = document.querySelector('section.mainContent')
         section.appendChild(dialog);
 
