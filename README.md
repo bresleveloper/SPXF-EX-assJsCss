@@ -40,5 +40,5 @@ once - `gulp trust-dev-cert`
 
 
 
-(more info)[https://sharepoint.stackexchange.com/questions/277352/what-is-the-best-practice-for-getting-js-and-css-files-into-a-sharepoint-modern]
+[more info](https://sharepoint.stackexchange.com/questions/277352/what-is-the-best-practice-for-getting-js-and-css-files-into-a-sharepoint-modern)
 
