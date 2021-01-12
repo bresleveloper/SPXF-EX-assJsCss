@@ -1,0 +1,26 @@
+﻿.bresleveloper-modal.overlay{
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.5);
+    z-index: 10;
+}
+
+.bresleveloper-modal > .modal{
+    width: 30%;
+    margin: auto;
+    margin-top: 10%;
+    position: relative;
+    background: white;
+    padding: 15px 50px;
+    border-radius: 15px;
+}
+
+.bresleveloper-modal > .modal > .x{
+    position: absolute;
+    right: 23px;
+    font-size: 1.5em;
+    top: 15px;
+}

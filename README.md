@@ -1,7 +1,9 @@
 # add-css-js-ti-site
 
-## Great Example for item create/add/update 
-in `customFiles for coupons/CustomSiteScript.js`
+## Great Example Content
+* `./customFiles Expamples/CustomSiteScript.js` starter api, with code for read/create/update via rest api and search
+* `./customFiles Expamples/coupons` for popuping coupons
+* `./customFiles Expamples/popUp Messages` for popup message on load
 
 
 ## Set your site

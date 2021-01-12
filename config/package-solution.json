@@ -1,7 +1,7 @@
 {
   "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/package-solution.schema.json",
   "solution": {
-    "name": "add-css-js-ti-site-client-side-solution",
+    "name": "add-css-js-to-site-client-side-solution",
     "id": "3fb2100c-813c-4452-994b-f95c010baa0b",
     "version": "1.0.0.0",
     "includeClientSideAssets": true,
@@ -22,6 +22,6 @@
     ]
   },
   "paths": {
-    "zippedPackage": "solution/add-css-js-ti-site.sppkg"
+    "zippedPackage": "solution/add-css-js-to-site.sppkg"
   }
 }
