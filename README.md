@@ -1,4 +1,6 @@
-# add-css-js-ti-site
+# add-css-js-to-site
+
+This SPFx Extension is to provide CSS and JS file on a modern site for custom code.
 
 ## Great Example Content
 * `./customFiles Expamples/CustomSiteScript.js` starter api, with code for read/create/update via rest api and search
