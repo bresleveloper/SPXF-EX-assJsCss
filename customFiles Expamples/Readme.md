@@ -4,4 +4,4 @@ The `CustomSiteScript.js` here is a base file for all REST options with SharePoi
 
 If you want some TermSet Functionality just add `TermSetUtil.js` to the end of `CustomSiteScript.js`
 
-usage: `TermSetUtil.getTermSetAsTree(<TS-GUID>,callback);`
+usage: `TermSetUtil.getTermSetAsTree(<TS-GUID>,callback);`, callback is `function(tree){}`
