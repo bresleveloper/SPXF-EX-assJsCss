@@ -83,6 +83,17 @@ let KornitCategoriesTermSetGuid = '663de3d3-8498-4500-94e6-09c9c3b40d86' ;
                         term.term = currentTerm;
                         term.title = currentTerm.get_name();
                         term.guid = currentTerm.get_id().toString();
+                        term.description = currentTerm.get_description();
+                        term.customProperties = currentTerm.get_customProperties();
+                        term.localCustomProperties = currentTerm.get_localCustomProperties();
+
+                        term.url = '';
+                        if (term.localCustomProperties && term.localCustomProperties.url) {
+                            term.url = term.localCustomProperties.url;
+                        }
+                        if (term.localCustomProperties && term.localCustomProperties._Sys_Nav_SimpleLinkUrl) {
+                            term.url = term.localCustomProperties._Sys_Nav_SimpleLinkUrl;
+                        }
                     }
                     //ariel
                     termsDict[term.guid] = term;

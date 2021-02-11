@@ -5,3 +5,14 @@ The `CustomSiteScript.js` here is a base file for all REST options with SharePoi
 If you want some TermSet Functionality just add `TermSetUtil.js` to the end of `CustomSiteScript.js`
 
 usage: `TermSetUtil.getTermSetAsTree(<TS-GUID>,callback);`
+
+
+# O365
+
+`Bresleveloper.js` is compatible with modern sites for taxo and menu.
+
+If you are using the taxo mega you need the css in `CustomSiteScript.css`
+
+
+# TODO
+Upgrade requests for taxo to graph
