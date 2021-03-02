@@ -9,5 +9,10 @@
     "**/lib-amd": true,
     "src/**/*.scss.ts": true
   },
-  "typescript.tsdk": ".\\node_modules\\typescript\\lib"
+  "typescript.tsdk": ".\\node_modules\\typescript\\lib",
+  "workbench.colorCustomizations": {
+    "activityBar.background": "#541B05",
+    "titleBar.activeBackground": "#752507",
+    "titleBar.activeForeground": "#FFFAF8"
+  }
 }

@@ -277,7 +277,8 @@ Bresleveloper.templates = {
                             tabindex="-1">
                                 <i 	data-icon-name="ChevronDown" 
                                     aria-hidden="true" 
-                                    class="ms-HorizontalNav-chevronDown chevron-80"> \ue70d </i>
+                                    class="ms-HorizontalNav-chevronDown chevron-80" 
+                                    style='font-style: normal;font-weight: normal;font-family: "FabricMDL2Icons";color: rgb(96, 94, 92);'> \ue70d </i>
                     </button>
                     <div id="bresleveloper-mega" class="close" style="position: relative;">
                         <span class="ms-layer">#CONTENT#</span>
